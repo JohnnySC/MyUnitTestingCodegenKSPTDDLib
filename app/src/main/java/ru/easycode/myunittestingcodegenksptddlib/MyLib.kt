@@ -25,15 +25,22 @@ class MyLib {
         stringBuilder.append(methodName)
         stringBuilder.append("CalledTimes: Int = 0\n\n")
         stringBuilder.append("    fun assert")
-        val funNamePascalCase = methodName.replaceFirstChar { it.uppercase() }
-        stringBuilder.append(funNamePascalCase)
+        val methodNamePascalCase = methodName.replaceFirstChar { it.uppercase() }
+        stringBuilder.append(methodNamePascalCase)
         stringBuilder.append("CalledTimes(expected: Int) {\n")
         stringBuilder.append("        assertEquals(expected, ")
         stringBuilder.append(methodName)
         stringBuilder.append("CalledTimes)\n")
         stringBuilder.append("    }\n\n")
 
-
+        stringBuilder.append("    override fun ")
+        stringBuilder.append(methodName)
+        stringBuilder.append("() {\n")
+        stringBuilder.append("        ")
+        stringBuilder.append(methodName)
+        stringBuilder.append("CalledTimes++\n")
+        stringBuilder.append("    }\n")
+        stringBuilder.append("}")
 
         return stringBuilder.toString()
     }
