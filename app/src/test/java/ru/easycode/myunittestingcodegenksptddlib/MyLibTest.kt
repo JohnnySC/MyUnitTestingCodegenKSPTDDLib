@@ -28,7 +28,11 @@ class MyLibTest {
                 "    fun assertShowCalledTimes(expected: Int) {\n" +
                 "        assertEquals(expected, showCalledTimes)\n" +
                 "    }\n" +
-                "\n"
+                "\n" +
+                "    override fun show() {\n" +
+                "        showCalledTimes++\n" +
+                "    }\n" +
+                "}"
 
         assertEquals(expected, actual)
     }
