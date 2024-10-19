@@ -19,6 +19,9 @@ class MyLib {
         stringBuilder.append(" : ")
         stringBuilder.append(interfaceName)
         stringBuilder.append(" {\n\n")
+        stringBuilder.append("    private var ")
+        stringBuilder.append(clasz.declaredMethods.first().name)
+        stringBuilder.append("CalledTimes: Int = 0\n\n")
 
         return stringBuilder.toString()
     }
