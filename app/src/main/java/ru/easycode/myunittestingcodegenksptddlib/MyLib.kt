@@ -19,9 +19,21 @@ class MyLib {
         stringBuilder.append(" : ")
         stringBuilder.append(interfaceName)
         stringBuilder.append(" {\n\n")
+
         stringBuilder.append("    private var ")
-        stringBuilder.append(clasz.declaredMethods.first().name)
+        val methodName = clasz.declaredMethods.first().name
+        stringBuilder.append(methodName)
         stringBuilder.append("CalledTimes: Int = 0\n\n")
+        stringBuilder.append("    fun assert")
+        val funNamePascalCase = methodName.replaceFirstChar { it.uppercase() }
+        stringBuilder.append(funNamePascalCase)
+        stringBuilder.append("CalledTimes(expected: Int) {\n")
+        stringBuilder.append("        assertEquals(expected, ")
+        stringBuilder.append(methodName)
+        stringBuilder.append("CalledTimes)\n")
+        stringBuilder.append("    }\n\n")
+
+
 
         return stringBuilder.toString()
     }
