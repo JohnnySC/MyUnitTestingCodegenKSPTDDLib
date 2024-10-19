@@ -20,7 +20,10 @@ class MyLibTest {
                 "package ru.easycode.myunittestingcodegenksptddlib\n" +
                 "\n" +
                 "import junit.framework.TestCase.assertEquals\n" +
+                "\n" +
+                "class FakeOneFunNoArgUnit : OneFunNoArgUnit {\n" +
                 "\n"
+
         assertEquals(expected, actual)
     }
 
