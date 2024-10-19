@@ -24,6 +24,10 @@ class MyLibTest {
                 "class FakeOneFunNoArgUnit : OneFunNoArgUnit {\n" +
                 "\n" +
                 "    private var showCalledTimes: Int = 0\n" +
+                "\n" +
+                "    fun assertShowCalledTimes(expected: Int) {\n" +
+                "        assertEquals(expected, showCalledTimes)\n" +
+                "    }\n" +
                 "\n"
 
         assertEquals(expected, actual)
