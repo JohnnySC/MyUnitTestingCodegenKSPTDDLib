@@ -22,6 +22,8 @@ class MyLibTest {
                 "import junit.framework.TestCase.assertEquals\n" +
                 "\n" +
                 "class FakeOneFunNoArgUnit : OneFunNoArgUnit {\n" +
+                "\n" +
+                "    private var showCalledTimes: Int = 0\n" +
                 "\n"
 
         assertEquals(expected, actual)
