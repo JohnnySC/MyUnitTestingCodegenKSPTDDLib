@@ -4,6 +4,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 import ru.easycode.myunittestingcodegenksptddlib.arg.OneFunOneArgUnit
+import ru.easycode.myunittestingcodegenksptddlib.arg.TwoFunsOneArgEach
 import ru.easycode.myunittestingcodegenksptddlib.two.TwoFunsNoArgsUnit
 
 class MyLibTest {
@@ -13,6 +14,47 @@ class MyLibTest {
     @Before
     fun setup() {
         myLib = MyLib()
+    }
+
+    @Test
+    fun `two funs one argument each void type`() {
+        val actual = myLib.generate(TwoFunsOneArgEach::class.java)
+        val expected = "" +
+                "package ru.easycode.myunittestingcodegenksptddlib.arg\n" +
+                "\n" +
+                "import junit.framework.TestCase.assertEquals\n" +
+                "\n" +
+                "class FakeTwoFunsOneArgEach : TwoFunsOneArgEach {\n" +
+                "\n" +
+                "    private val showCalledList: MutableList<java.lang.Integer> = mutableListOf()\n" +
+                "\n" +
+                "    fun assertShowCalledTimes(expected: Int) {\n" +
+                "        assertEquals(expected, showCalledList.size)\n" +
+                "    }\n" +
+                "\n" +
+                "    fun assertShowCalledWith(position: Int, expected: java.lang.Integer) {\n" +
+                "        assertEquals(expected, showCalledList[position])\n" +
+                "    }\n" +
+                "\n" +
+                "    override fun show(arg0: java.lang.Integer) {\n" +
+                "        showCalledList.add(arg0)\n" +
+                "    }\n" +
+                "\n" +
+                "    private val animateCalledList: MutableList<ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration> = mutableListOf()\n" +
+                "\n" +
+                "    fun assertAnimateCalledTimes(expected: Int) {\n" +
+                "        assertEquals(expected, animateCalledList.size)\n" +
+                "    }\n" +
+                "\n" +
+                "    fun assertAnimateCalledWith(position: Int, expected: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
+                "        assertEquals(expected, animateCalledList[position])\n" +
+                "    }\n" +
+                "\n" +
+                "    override fun run(arg0: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
+                "        animateCalledList.add(arg0)\n" +
+                "    }\n" +
+                "}"
+        assertEquals(expected, actual)
     }
 
     @Test
