@@ -37,7 +37,7 @@ class MyLibTest {
                 "\n" +
                 "    override fun run(arg0: java.lang.String) {\n" +//todo what is the name of arg?
                 "        runCalledList.add(arg0)\n" +
-                "    }\n"
+                "    }\n" +
                 "}"
         assertEquals(expected, actual)
     }
