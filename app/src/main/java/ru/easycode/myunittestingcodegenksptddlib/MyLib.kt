@@ -1,6 +1,5 @@
 package ru.easycode.myunittestingcodegenksptddlib
 
-import android.R
 import java.lang.reflect.Method
 
 class MyLib {

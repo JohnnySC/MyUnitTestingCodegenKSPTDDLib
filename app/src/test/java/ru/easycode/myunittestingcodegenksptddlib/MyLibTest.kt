@@ -50,7 +50,7 @@ class MyLibTest {
                 "        assertEquals(expected, animateCalledList[position])\n" +
                 "    }\n" +
                 "\n" +
-                "    override fun run(arg0: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
+                "    override fun animate(arg0: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
                 "        animateCalledList.add(arg0)\n" +
                 "    }\n" +
                 "}"
