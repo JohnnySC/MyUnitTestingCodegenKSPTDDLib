@@ -3,6 +3,7 @@ package ru.easycode.myunittestingcodegenksptddlib
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
+import ru.easycode.myunittestingcodegenksptddlib.arg.OneFunOneArgUnit
 import ru.easycode.myunittestingcodegenksptddlib.two.TwoFunsNoArgsUnit
 
 class MyLibTest {
@@ -12,6 +13,33 @@ class MyLibTest {
     @Before
     fun setup() {
         myLib = MyLib()
+    }
+
+    @Test
+    fun `one fun one argument void type`() {
+        val actual = myLib.generate(OneFunOneArgUnit::class.java)
+        val expected = "" +
+                "package ru.easycode.myunittestingcodegenksptddlib.arg\n" +
+                "\n" +
+                "import junit.framework.TestCase.assertEquals\n" +
+                "\n" +
+                "class FakeOneFunOneArgUnit : OneFunOneArgUnit {\n" +
+                "\n" +
+                "    private val runCalledList: MutableList<java.lang.String> = mutableListOf()\n" +
+                "\n" +
+                "    fun assertRunCalledTimes(expected: Int) {\n" +
+                "        assertEquals(expected, runCalledList.size)\n" +
+                "    }\n" +
+                "\n" +
+                "    fun assertRunCalledWith(position: Int, expected: java.lang.String) {\n" +
+                "        assertEquals(expected, runCalledList[position])\n" +
+                "    }\n" +
+                "\n" +
+                "    override fun run(arg0: java.lang.String) {\n" +//todo what is the name of arg?
+                "        runCalledList.add(arg0)\n" +
+                "    }\n"
+                "}"
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -45,7 +73,7 @@ class MyLibTest {
                 "    }\n" +
                 "}"
 
-                assertEquals(expected, actual)
+        assertEquals(expected, actual)
     }
 
     @Test
