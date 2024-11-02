@@ -4,6 +4,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 import ru.easycode.myunittestingcodegenksptddlib.arg.OneFunOneArgUnit
+import ru.easycode.myunittestingcodegenksptddlib.arg.OneFunTwoArgsUnit
 import ru.easycode.myunittestingcodegenksptddlib.arg.TwoFunsOneArgEach
 import ru.easycode.myunittestingcodegenksptddlib.two.TwoFunsNoArgsUnit
 
@@ -14,6 +15,37 @@ class MyLibTest {
     @Before
     fun setup() {
         myLib = MyLib()
+    }
+
+    @Test
+    fun `one fun two args void type`() {
+        val actual = myLib.generate(OneFunTwoArgsUnit::class.java)
+        val excepted = "" +
+                "package ru.easycode.myunittestingcodegenksptddlib.arg\n" +
+                "\n" +
+                "import junit.framework.TestCase.assertEquals\n" +
+                "\n" +
+                "class FakeOneFunTwoArgsUnit : OneFunTwoArgsUnit {\n" +
+                "\n" +
+                "    private val logArg0CalledList: MutableList<java.lang.String> = mutableListOf()\n" +
+                "    private val logArg1CalledList: MutableList<ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration> = mutableListOf()\n" +
+                "\n" +
+                "    fun assertLogCalledTimes(expected: Int) {\n" +
+                "        assertEquals(expected, logArg0CalledList.size)\n" +
+                "    }\n" +
+                "\n" +
+                "    fun assertLogCalledWith(position: Int, expectedArg0: java.lang.String, expectedArg1: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
+                "        assertEquals(expectedArg0, logArg0CalledList[position])\n" +
+                "        assertEquals(expectedArg1, logArg1CalledList[position])\n" +
+                "    }\n" +
+                "\n" +
+                "    override fun log(arg0: String, arg1: CustomDuration) {\n" +
+                "        logArg0CalledList.add(arg0)\n" +
+                "        logArg1CalledList.add(arg1)\n" +
+                "    }\n" +
+                "}"
+
+        assertEquals(excepted, actual)
     }
 
     @Test
