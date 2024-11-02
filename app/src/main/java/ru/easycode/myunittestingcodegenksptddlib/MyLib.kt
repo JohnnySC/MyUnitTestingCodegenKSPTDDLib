@@ -22,7 +22,7 @@ class MyLib {
         stringBuilder.append(interfaceName)
         stringBuilder.append(" {\n")
 
-        clasz.declaredMethods.forEach { method ->
+        clasz.declaredMethods.sortedBy { it.name }.forEach { method ->
             if (method.parameters.isEmpty()) {
                 noArgsUnit(stringBuilder, method)
             } else {
@@ -36,47 +36,70 @@ class MyLib {
     }
 
     private fun argsUnit(stringBuilder: java.lang.StringBuilder, method: Method) {
-        method.parameters.forEachIndexed { index,  parameter ->
+        val methodName = method.name
+        val methodNamePascalCase = methodName.replaceFirstChar { it.uppercase() }
+        stringBuilder.append("\n")
+        method.parameters.forEachIndexed { index, parameter ->
             val parameterType = parameter.type.name
-            stringBuilder.append("\n")
-            val methodName = method.name
-            val methodNamePascalCase = methodName.replaceFirstChar { it.uppercase() }
             stringBuilder.append("    private val ")
-            val funNameCalledList = methodName + "CalledList"
+            val funNameCalledList = methodName + "Arg${index}CalledList"
             stringBuilder.append(funNameCalledList)
             stringBuilder.append(": MutableList<")
             stringBuilder.append(parameterType)
-            stringBuilder.append("> = mutableListOf()\n\n")
-            stringBuilder.append("    fun assert")
-            stringBuilder.append(methodNamePascalCase)
-            stringBuilder.append("CalledTimes(expected: Int) {\n")
-            stringBuilder.append("        assertEquals(expected, ")
-            stringBuilder.append(funNameCalledList)
-            stringBuilder.append(".size)\n")
-            stringBuilder.append("    }\n\n")
-            stringBuilder.append("    fun assert")
-            stringBuilder.append(methodNamePascalCase)
-            stringBuilder.append("CalledWith(position: Int, expected: ")
-            stringBuilder.append(parameterType)
-            stringBuilder.append(") {\n")
-            stringBuilder.append("        assertEquals(expected, ")
-            stringBuilder.append(funNameCalledList)
-            stringBuilder.append("[position])\n")
-            stringBuilder.append("    }\n\n")
-            stringBuilder.append("    override fun ")
+            stringBuilder.append("> = mutableListOf()\n")
+        }
+        stringBuilder.append("\n")
+
+        stringBuilder.append("    fun assert")
+        stringBuilder.append(methodNamePascalCase)
+        stringBuilder.append("CalledTimes(expected: Int) {\n")
+        stringBuilder.append("        assertEquals(expected, ")
+        stringBuilder.append(methodName)
+        stringBuilder.append("Arg0CalledList")
+        stringBuilder.append(".size)\n")
+        stringBuilder.append("    }\n\n")
+
+        stringBuilder.append("    fun assert")
+        stringBuilder.append(methodNamePascalCase)
+        stringBuilder.append("CalledWith(position: Int")
+
+        method.parameters.forEachIndexed { index, parameter ->
+            stringBuilder.append(", expectedArg$index: ")
+            stringBuilder.append(parameter.type.name)
+        }
+
+        stringBuilder.append(") {\n")
+
+        method.parameters.forEachIndexed { index, parameter ->
+            stringBuilder.append("        assertEquals(expectedArg$index, ")
             stringBuilder.append(methodName)
-            stringBuilder.append("(arg")
+            stringBuilder.append("Arg${index}CalledList")
+            stringBuilder.append("[position])\n")
+        }
+        stringBuilder.append("    }\n\n")
+        stringBuilder.append("    override fun ")
+        stringBuilder.append(methodName)
+        stringBuilder.append("(")
+        method.parameters.forEachIndexed { index, parameter ->
+            stringBuilder.append("arg")
             stringBuilder.append(index)
             stringBuilder.append(": ")
-            stringBuilder.append(parameterType)
-            stringBuilder.append(") {\n")
+            stringBuilder.append(parameter.type.name)
+            if (index != method.parameters.size - 1)
+                stringBuilder.append(", ")
+        }
+        stringBuilder.append(") {\n")
+        method.parameters.forEachIndexed { index, parameter ->
             stringBuilder.append("        ")
-            stringBuilder.append(funNameCalledList)
+            stringBuilder.append(method.name)
+            stringBuilder.append("Arg")
+            stringBuilder.append(index)
+            stringBuilder.append("CalledList")
             stringBuilder.append(".add(arg")
             stringBuilder.append(index)
             stringBuilder.append(")\n")
-            stringBuilder.append("    }\n")
         }
+        stringBuilder.append("    }\n")
     }
 
     private fun noArgsUnit(stringBuilder: java.lang.StringBuilder, method: Method) {
