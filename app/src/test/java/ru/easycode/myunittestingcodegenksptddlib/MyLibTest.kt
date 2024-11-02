@@ -39,7 +39,7 @@ class MyLibTest {
                 "        assertEquals(expectedArg1, logArg1CalledList[position])\n" +
                 "    }\n" +
                 "\n" +
-                "    override fun log(arg0: String, arg1: CustomDuration) {\n" +
+                "    override fun log(arg0: java.lang.String, arg1: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
                 "        logArg0CalledList.add(arg0)\n" +
                 "        logArg1CalledList.add(arg1)\n" +
                 "    }\n" +
@@ -58,32 +58,32 @@ class MyLibTest {
                 "\n" +
                 "class FakeTwoFunsOneArgEach : TwoFunsOneArgEach {\n" +
                 "\n" +
-                "    private val showCalledList: MutableList<java.lang.Integer> = mutableListOf()\n" +
-                "\n" +
-                "    fun assertShowCalledTimes(expected: Int) {\n" +
-                "        assertEquals(expected, showCalledList.size)\n" +
-                "    }\n" +
-                "\n" +
-                "    fun assertShowCalledWith(position: Int, expected: java.lang.Integer) {\n" +
-                "        assertEquals(expected, showCalledList[position])\n" +
-                "    }\n" +
-                "\n" +
-                "    override fun show(arg0: java.lang.Integer) {\n" +
-                "        showCalledList.add(arg0)\n" +
-                "    }\n" +
-                "\n" +
-                "    private val animateCalledList: MutableList<ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration> = mutableListOf()\n" +
+                "    private val animateArg0CalledList: MutableList<ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration> = mutableListOf()\n" +
                 "\n" +
                 "    fun assertAnimateCalledTimes(expected: Int) {\n" +
-                "        assertEquals(expected, animateCalledList.size)\n" +
+                "        assertEquals(expected, animateArg0CalledList.size)\n" +
                 "    }\n" +
                 "\n" +
-                "    fun assertAnimateCalledWith(position: Int, expected: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
-                "        assertEquals(expected, animateCalledList[position])\n" +
+                "    fun assertAnimateCalledWith(position: Int, expectedArg0: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
+                "        assertEquals(expectedArg0, animateArg0CalledList[position])\n" +
                 "    }\n" +
                 "\n" +
                 "    override fun animate(arg0: ru.easycode.myunittestingcodegenksptddlib.data.CustomDuration) {\n" +
-                "        animateCalledList.add(arg0)\n" +
+                "        animateArg0CalledList.add(arg0)\n" +
+                "    }\n" +
+                "\n" +
+                "    private val showArg0CalledList: MutableList<java.lang.Integer> = mutableListOf()\n" +
+                "\n" +
+                "    fun assertShowCalledTimes(expected: Int) {\n" +
+                "        assertEquals(expected, showArg0CalledList.size)\n" +
+                "    }\n" +
+                "\n" +
+                "    fun assertShowCalledWith(position: Int, expectedArg0: java.lang.Integer) {\n" +
+                "        assertEquals(expectedArg0, showArg0CalledList[position])\n" +
+                "    }\n" +
+                "\n" +
+                "    override fun show(arg0: java.lang.Integer) {\n" +
+                "        showArg0CalledList.add(arg0)\n" +
                 "    }\n" +
                 "}"
         assertEquals(expected, actual)
@@ -99,18 +99,18 @@ class MyLibTest {
                 "\n" +
                 "class FakeOneFunOneArgUnit : OneFunOneArgUnit {\n" +
                 "\n" +
-                "    private val runCalledList: MutableList<java.lang.String> = mutableListOf()\n" +
+                "    private val runArg0CalledList: MutableList<java.lang.String> = mutableListOf()\n" +
                 "\n" +
                 "    fun assertRunCalledTimes(expected: Int) {\n" +
-                "        assertEquals(expected, runCalledList.size)\n" +
+                "        assertEquals(expected, runArg0CalledList.size)\n" +
                 "    }\n" +
                 "\n" +
-                "    fun assertRunCalledWith(position: Int, expected: java.lang.String) {\n" +
-                "        assertEquals(expected, runCalledList[position])\n" +
+                "    fun assertRunCalledWith(position: Int, expectedArg0: java.lang.String) {\n" +
+                "        assertEquals(expectedArg0, runArg0CalledList[position])\n" +
                 "    }\n" +
                 "\n" +
                 "    override fun run(arg0: java.lang.String) {\n" +//todo what is the name of arg?
-                "        runCalledList.add(arg0)\n" +
+                "        runArg0CalledList.add(arg0)\n" +
                 "    }\n" +
                 "}"
         assertEquals(expected, actual)
